@@ -1,0 +1,161 @@
+<link rel="stylesheet" href="css/Dev/patient.css">
+
+<h1>Acceso Paciente</h1>
+
+<!-- Mensajes de éxito operaciones crear y borrar -->
+<div class="alert alert-success" ng-show="successMsg" 
+     style="position: fixed; top: 100px; right: 20px; z-index: 9999; width: 300px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+    <i class="fa fa-check-circle fa-lg"></i> {{successMsg}}
+</div>
+
+<a class="btn btn-primary" id="logout" ng-click="logout();" href="#"> 
+    <i class="fa fa-sign-out  fa-lg"></i> Cerrar Sesión</a>
+
+<form name="outerForm" class="tab-form-demo"> 
+    <uib-tabset active="activeForm"> 
+        <uib-tab index="0" heading="Registros de Peso"> 
+
+            <a class="btn btn-success" id="buttonOption" ng-click="showForm();" ng-show="addWeight==0" href="#"> 
+                <i class="fa fa-plus fa-lg"></i> Añadir</a> 
+
+            <a class="btn btn-success" id="buttonOption" ng-click="changeView(1);" ng-show="showGraph==0&&addWeight==0" href="#">
+                <i class="fa fa-eye fa-lg"></i> Gráfico</a> 
+
+            <a class="btn btn-success" id="buttonOption" ng-click="changeView(0);" ng-show="showGraph==1&&addWeight==0" href="#"> 
+                <i class="fa fa-list fa-lg"></i> Listado</a>
+            
+            <!-- Gráfico -->
+            <div id="weightsGraph" ng-if="showGraph==1&&addWeight==0"> 
+                <div google-chart chart="myChartObject" style="height:400px; width:100%;"></div>
+
+                <div style="text-align: center; margin-top: 10px; padding-bottom: 20px;">
+                    <button class="btn btn-success" ng-click="prevPage()" ng-disabled="currentPage == 0" style="margin-right: 15px;">
+                        <i class="fa fa-arrow-left"></i> Anterior
+                    </button>
+                    
+                    <span style="font-weight: bold; color: #2c3e50;">
+                        Mostrando {{currentPage * pageSize + 1}} - {{Math.min((currentPage + 1) * pageSize, allData.length)}} de {{allData.length}}
+                    </span>
+
+                    <button class="btn btn-success" ng-click="nextPage()" ng-disabled="(currentPage + 1) * pageSize >= allData.length" style="margin-left: 15px;">
+                        Siguiente <i class="fa fa-arrow-right"></i>
+                    </button>
+                </div>
+
+            </div> 
+
+            <!-- Listado de pesos en formato tabla -->
+            <div id="weightsList" ng-show="showGraph==0 && addWeight==0">
+
+                <div style="margin-bottom: 20px; max-width: 350px;">
+                    <div class="input-group">
+                        <span class="input-group-addon" style="background-color: #34495e; color: white; border:none;">
+                            <i class="fa fa-search"></i>
+                        </span>
+                        <input type="text" class="form-control" placeholder="Filtrar por fecha o peso..." ng-model="searchWeight">
+                    </div>
+                </div>
+
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr style="background-color: #f5f5f5;">
+                            <th>Peso (kg)</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- La directiva ng-repeat recorre el array weightsList que ya existe en el controlador -->
+                        <tr ng-repeat="weight in weightsList | filter: searchWeight track by $index">
+                            <td>{{weight.PESO}}</td>
+                            <td>{{weight.FECHA_ALTER}}</td>
+                            <!-- Nueva columna para el botón de borrar -->
+                            <td>
+                                <span class="fa-stack fa-lg" ng-click="deleteWeight(weight.PESO_ID, PatientID);" style="cursor:pointer;">
+                                    <i class="fa fa-circle fa-stack-2x text-danger"></i>
+                                    <i class="fa fa-times fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> 
+
+            <!-- Formulario para añadir peso -->
+           <div id="weightForm" ng-show="addWeight==1" style="padding-top: 100px;">
+                <form name="addWeightForm" novalidate style="text-align: left; margin-left: 20px;">
+                    
+                    <div style="display: flex; gap: 30px; align-items: flex-end; flex-wrap: wrap;">
+                        
+                        <div style="display: flex; flex-direction: column;">
+                            <label style="margin-bottom: 5px;"><strong>Peso (kg):</strong></label>
+                            <input type="number" name="Weight" ng-model="WeightData.peso" class="form-control" 
+                                style="width: 150px;" placeholder="Ej: 70.5" required />
+                        </div>
+
+                        <div style="display: flex; flex-direction: column;">
+                            <label style="margin-bottom: 5px;"><strong>Fecha:</strong></label>
+                            <input type="date" name="Date" ng-model="WeightData.fecha" class="form-control" 
+                                style="width: 180px;" required />
+                        </div>
+
+                    </div>
+
+                    <div style="margin-top: 40px;">
+                        <a class="btn btn-success" ng-click="createNewWeight();" style="margin-right: 15px;">
+                            <i class="fa fa-check-circle fa-lg"></i> Crear
+                        </a>
+                        <a class="btn btn-danger" ng-click="cancelNewWeight();">
+                            <i class="fa fa-times-circle fa-lg"></i> Cancelar
+                        </a>
+                    </div>
+
+                </form>
+            </div>
+        
+        </uib-tab>
+
+    <uib-tab index="1" heading="Visitas">
+        <div id="visitsList" style="margin-top:20px;">
+
+            <!-- Buscador escenario visitas -->
+            <div style="margin-bottom: 20px; max-width: 400px;">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    <input type="text" 
+                        class="form-control" 
+                        placeholder="Buscar por médico, diagnóstico o fecha..." 
+                        ng-model="searchVisit">
+                </div>
+            </div>
+
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr style="background-color: #3b83bd; color: white; font-weight: bold;">
+                        <td>Médic@</td>
+                        <td>Fecha de la visita</td>
+                        <td>Diagnóstico</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Iteramos sobre la lista de visitas del paciente -->
+                    <tr ng-repeat="visit in visitsList | filter: searchVisit track by $index">
+                        <td>{{visit.MED_NOMBRE}}</td>
+                        <td>{{visit.FECHA_VIS | date:'dd-MM-yyyy'}}</td>
+                        <td>{{visit.DIAGNOSTICO || 'Sin especificar'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div ng-show="(visitsList | filter: searchVisit).length == 0 && visitsList.length > 0" class="alert alert-warning">
+                No se han encontrado visitas que coincidan con "{{searchVisit}}".
+            </div>
+
+            <!-- Mensaje si no hay visitas -->
+            <div ng-show="visitsList.length == 0" class="alert alert-info">
+                No tienes visitas registradas todavía.
+            </div>
+        </div>
+    </uib-tab>
+
+    </uib-tabset> 
+</form>

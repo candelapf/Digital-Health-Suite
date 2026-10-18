@@ -1,0 +1,15 @@
+{
+  "name": "aplicacion_web_gestion",
+  "version": "1.0.0",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "~1.9.3",
+    "connect-multiparty": "~1.2.5",
+    "express": "^5.2.1",
+    "express-myconnection": "*",
+    "fresh": "^0.5.2",
+    "jsonwebtoken": "^1.2.0",
+    "mysql": "*",
+    "send": "^1.2.1"
+  }
+}

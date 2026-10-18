@@ -1,0 +1,287 @@
+h1{ 
+    margin-left:1%; 
+} 
+#doctorSelect{ 
+    width:30%; 
+    margin-left:1%; 
+}
+
+#associatedVisits{ 
+    width:80%; 
+    margin: 0 auto; 
+} 
+#headerTable{ 
+    font-weight: bold; 
+    background-color: #deb4e3; 
+}
+
+#comeBackButton{ 
+    float:right; 
+    margin-right: 50px; 
+    margin-top:-30px; 
+}
+
+#personalData{ 
+    margin-left:3%; 
+}
+
+#label{ 
+    font-weight: bold; 
+}
+
+#studieData{ 
+    margin-left:3%; 
+}
+
+#seriesTable{ 
+    width:50%; 
+    margin: 0 auto; 
+}
+
+h3{ 
+    margin-left:2%; 
+    color:#1bae7d; 
+    font-weight: bold; 
+}
+
+/* Visualización de imágenes */
+.toolbtn 
+{ 
+ width:30px; 
+ height:30px; 
+ margin:1%; 
+    cursor: pointer; 
+    border: 1px solid #cecece; 
+    font: normal 12px/normal "ABeeZee" , Helvetica, sans-serif; 
+    color: rgba(0,0,0,1); 
+    text-align: center; 
+    -o-text-overflow: ellipsis; 
+    text-overflow: ellipsis; 
+    background: #f5f5f5; 
+    outline:none; 
+    background-repeat:no-repeat; 
+    background-position:center; 
+} 
+.toolbtn:hover 
+{ 
+    border: 1px solid #898888; 
+    -webkit-box-shadow: 0 0 2px 1px rgba(0,0,0,0.5); 
+    box-shadow: 0 0 2px 1px rgba(0,0,0,0.5); 
+} 
+.toolbtn:active,.toolbtn:focus 
+{ 
+    border-color:  red; 
+    -webkit-box-shadow: 0 0 2px 1px red; 
+    box-shadow: 0 0 2px 3px  red; 
+} 
+#imageContainer{ 
+    text-align: center; 
+    margin-top:30px; 
+} 
+#firstCol{ 
+    width:25%; /* Espacio suficiente para 3-4 iconos por fila */
+    vertical-align: top;
+    padding-left: 10px; /* Margen interno para que no peguen al borde */
+} 
+#secondCol{ 
+    width:50%; 
+    vertical-align: top; 
+} 
+#thirdCol{ 
+    width:30%; 
+    vertical-align: top; 
+} 
+#urlsList{ 
+    width:100%; 
+} 
+#colTitle{ 
+    float:left; 
+} 
+#imgTabTitle{ 
+    height:20px; 
+    position:relative; 
+    display:table-row; 
+} 
+#imgTabContent{ 
+    height:15px; 
+    position:relative; 
+    display:table-row; 
+} 
+#imgTabTitleText{ 
+    display: table-cell;  
+    text-align: center; 
+    font: normal normal bold 14px/normal 'Times New Roman', Times, serif; 
+    border-bottom: #898888 1px solid; 
+}
+#imgTabContentText{ 
+    display: table-cell; 
+    overflow: hidden; 
+    border-bottom: #898888 1px solid; 
+    font-size: 12px; 
+}
+
+/* Estilos para la Cabecera (mejora) */
+.custom-header {
+    background: linear-gradient(90deg, #5a185a 0%, #9a52ac 100%) !important;
+    border: none;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    min-height: 80px;
+}
+
+.navbar-brand {
+    color: #ffffff !important;
+    font-weight: bold;
+    font-size: 1.4em;
+    padding-top: 30px !important;
+}
+
+.header-title-container {
+    text-align: center;
+    padding-top: 15px;
+    color: white;
+}
+
+.header-main-title {
+    display: block;
+    font-size: 1.5em;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.header-subtitle {
+    font-size: 0.8em;
+    color: #d1d1d1;
+}
+
+/* Efecto hover para las filas de la tabla de visitas */
+#associatedVisits table tr:not(#headerTable):hover {
+    background-color: #fcebfc; 
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Suaviza el cambio de color */
+}
+
+/* Estilo base y animación para el botón de ver paciente */
+.fa-stack {
+    transition: all 0.2s ease-in-out; /* Controla la velocidad de la animación */
+}
+
+/* Efecto al pasar el ratón (Hover) */
+.fa-stack:hover {
+    transform: scale(1.2); /* Agranda el icono un 20% */
+    filter: brightness(1.2); /* Lo ilumina levemente */
+    cursor: pointer;
+}
+
+/* Efecto al hacer clic (Active) */
+.fa-stack:active {
+    transform: scale(1.1); /* Se encoge un poco al pulsar para dar sensación de botón real */
+    filter: brightness(1.4); /* Brillo más intenso al clicar */
+}
+
+/* Modificación del botón Volver */
+#comeBackButton { 
+    float: right; 
+    margin-right: 50px; 
+    margin-top: 10px; /* Bajado para separarlo de la cabecera (antes -30px) */
+    background-color: #32CD32; 
+    border-color: #228B22; 
+    color: white; 
+    font-weight: bold;
+    transition: all 0.3s ease; /* Suaviza la transición de tamaño y brillo */
+}
+
+/* Efecto al pasar el ratón (Hover) */
+#comeBackButton:hover {
+    background-color: #3dfc3d; /* Verde lima más brillante */
+    transform: scale(1.1); /* Agranda el botón un 10% */
+    box-shadow: 0 0 15px rgba(50, 205, 50, 0.6); /* Efecto de iluminación/resplandor verde */
+    color: white;
+}
+
+/* Efecto al hacer clic (Active) */
+#comeBackButton:active {
+    transform: scale(0.95); /* Se encoge levemente al pulsar */
+    filter: brightness(1.2); /* Aumenta el brillo al hacer clic */
+}
+
+/* Personalización del botón de abrir imagen */
+#openurlbtn.btn-primary {
+    background-color: #9338ba; 
+    border-color: #5e1184;
+    margin-top: 10px;
+    padding: 6px 20px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+/* Efecto hover para el botón de abrir imagen */
+#openurlbtn.btn-primary:hover {
+    background-color: #7e57c2;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Capa de carga que cubre la pantalla */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente */
+    z-index: 9999; /* Por encima de todo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading-content {
+    text-align: center;
+    color: #673ab7; 
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.loading-content i {
+    margin-bottom: 10px;
+}
+
+/* Estado de confirmación de cierre */
+.btn-closing {
+    background-color: #f44336 !important; /* Rojo de aviso */
+    border-color: #d32f2f !important;
+    transform: scale(0.9); /* Efecto de pulsación */
+    filter: brightness(1.2);
+    transition: all 0.2s ease;
+}
+
+/* tooltip o texto de aviso rápido */
+.btn-closing::after {
+    content: "Sesión terminada";
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: #d32f2f;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+/* Estilo del buscador de pacientes */
+.search-container {
+    width: 80%;
+    margin: 0 auto 20px auto; /* Centrado y con margen inferior */
+}
+
+.search-container .input-group-addon {
+    background-color: #673ab7; 
+    color: white;
+    border: none;
+}
+
+.search-container input:focus {
+    border-color: #673ab7;
+    box-shadow: 0 0 8px rgba(103, 58, 183, 0.3);
+}

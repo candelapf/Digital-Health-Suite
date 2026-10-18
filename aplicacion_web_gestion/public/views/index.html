@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+ <head>
+	<meta charset="UTF-8">
+
+
+	<title>App Gestión </title>
+
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/Core/bootstrap.min.css">
+  <link rel="stylesheet" href="css/Core/font-awesome.css">
+  <link rel="stylesheet" href="css/Core/font-awesome.min.css">
+  <link rel="stylesheet" href="css/Core/normalize.css">
+
+  <!-- JS -->
+  <!-- load angular and our custom application -->   
+  <script src="js/Core/angular.min.js"></script>
+  <script src="js/Core/ui-bootstrap-tpls-0.14.3.min.js"></script>
+
+  <script src="js/Dev/app.js"></script>
+  <script src="js/Dev/Services/management.js"></script>
+
+  <style>
+    /* --- Estilos para las PESTAÑAS de los ESCENARIOS --- */
+    
+    /* Pacientes: Azul Marino Texto 2 (75% claro) */
+    .nav-tabs > li:nth-child(1).active > a {
+      background-color: #a1cef5 !important; 
+      color: #000 !important;
+      font-weight: bold;
+      border: 1px solid #083678 !important;
+    }
+
+    /* Médicos: Verde (40% claro) */
+    .nav-tabs > li:nth-child(2).active > a {
+      background-color: #a6dfb2 !important;
+      color: #000 !important;
+      font-weight: bold;
+      border: 1px solid #0a5a03 !important;
+    }
+
+    /* Visitas: Púrpura (60% claro) */
+    .nav-tabs > li:nth-child(3).active > a {
+      background-color: #e6cbf4 !important; 
+      color: #000 !important;
+      font-weight: bold;
+      border: 1px solid #8569cd !important;
+    }
+
+    /* --- Estilos para el FONDO de ESCENARIO --- */
+
+    /* Fondo Pacientes: Azul Marino Texto 2 (90% claro) */
+    .tab-pane:nth-child(1) {
+      background-color: #DDEBF7; 
+      padding: 20px;
+      border-radius: 0 0 10px 10px;
+      border: 1px solid #BDD7EE;
+    }
+
+    /* Fondo Médicos: Verde (80% claro) */
+    .tab-pane:nth-child(2) {
+      background-color: #EBF8EE;
+      padding: 20px;
+      border-radius: 0 0 10px 10px;
+      border: 1px solid #C6EFCE;
+    }
+
+    /* Fondo Visitas: Púrpura (80% claro) */
+    .tab-pane:nth-child(3) {
+      background-color: #F3EAF9;
+      padding: 20px;
+      border-radius: 0 0 10px 10px;
+      border: 1px solid #E1D5E7;
+    }
+    
+    /* BORDES: mejora la visibilidad de las tablas sobre fondos de color  */
+    .table {
+      background-color: rgba(255, 255, 255, 0.7) !important;
+      margin-top: 15px;
+    }
+
+    /* --- Mejora de INTERACTIVIDAD: EFECTO SOMBRA --- */
+
+    /* Efecto para los botones de Acción (Crear, Editar, Cancelar) */
+    .btn:hover {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      transform: translateY(-1px); /* Elevación sutil */
+      transition: all 0.3s ease;    /* Transición suave */
+    }
+
+    /* Efecto para los iconos circulares (Eliminar y Editar) */
+    .fa-stack:hover {
+      cursor: pointer;
+      filter: brightness(1.1);      /* Aumenta un poco el brillo */
+      transform: scale(1.1);        /* Agranda ligeramente el icono */
+      transition: all 0.2s ease-in-out;
+    }
+
+    /* Sombra para las filas de la tabla al pasar el ratón */
+    tbody tr:hover {
+      background-color: rgba(255, 255, 255, 0.9) !important;
+      transition: background-color 0.2s;
+    }
+
+    /* --- Diseño de TÍTULO Y LOGO --- */
+
+    .app-header {
+      display: flex;                /* Activamos Flexbox */
+      justify-content: space-between; /* Título a la izquierda, Logo a la derecha */
+      align-items: center;         /* Centrado vertical */
+      background: linear-gradient(135deg, #1A237E 0%, #3949AB 100%); /* Degradado Azul Marino Profesional */
+      color: white;                /* Texto en blanco para contraste */
+      padding: 20px 50px;          /* Espaciado interno */
+      margin-bottom: 10px;         /* Separación con las pestañas */
+      border-radius: 10px;         /* Bordes redondeados */
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Sombra para dar profundidad */
+    }
+
+    /* Diseño del título y subtítulo */
+    .header-title h1 {
+      margin: 0;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-weight: 600;            /* Grosor de las letras */
+      letter-spacing: 1px;        /* Espaciado entre letras */
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra de texto */
+    }
+
+    .header-title h1 i {
+      margin-right: 15px;         /* Espacio entre icono y texto */
+      opacity: 0.8;
+    }
+
+    .header-title .subtitle {
+      margin: 5px 0 0 50px;       /* Alineación con el texto del título */
+      font-size: 1.1em;
+      font-style: italic;
+      opacity: 0.7;
+    }
+
+    /* Contenedor circular del logo */
+    .header-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;               /* Ancho fijo para el círculo */
+    height: 100px;              /* Alto fijo para el círculo */
+    background-color: white;    /* Fondo blanco para que el logo resalte */
+    border-radius: 50%;         /* Forma circular perfecta */
+    padding: 10px;              /* Espacio interno para que el logo no toque los bordes */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Sombra para dar relieve */
+    border: 3px solid rgba(255, 255, 255, 0.5); /* Borde suave */
+    }
+
+    /* Estilos específicos para la imagen del Logo */
+    .corporative-logo-img {
+      max-width: 90%;             /* La imagen no superará el 90% del ancho del círculo */
+      max-height: 90%;            /* La imagen no superará el 90% del alto del círculo */
+      height: auto;               /* Mantiene la proporción */
+      display: block;
+      object-fit: contain;        /* Asegura que la imagen se ajuste sin recortarse */
+    }
+
+    /* --- RESALTADO de las CABECERAS de las TABLAS --- */
+
+    /* Estilo base para la primera fila de todas las tablas */
+    .tab-content .table tr:first-child td {
+      font-weight: bold !important;
+      font-size: 1.1em !important;
+      vertical-align: middle !important;
+      background-color: rgba(255, 255, 255, 0.9) !important;
+    }
+
+    /* Pacientes: Borde Azul */
+    .tab-pane:nth-child(1) .table tr:first-child td {
+      border-top: 3px solid #8496B0 !important;
+      border-bottom: 3px solid #8496B0 !important;
+      color: #2C3E50 !important;
+    }
+
+    /* Médicos: Borde Verde */
+    .tab-pane:nth-child(2) .table tr:first-child td {
+      border-top: 3px solid #70A856 !important;
+      border-bottom: 3px solid #70A856 !important;
+      color: #1B4332 !important;
+    }
+
+    /* Visitas: Borde Púrpura */
+    .tab-pane:nth-child(3) .table tr:first-child td {
+      border-top: 3px solid #B4A7D6 !important;
+      border-bottom: 3px solid #B4A7D6 !important;
+      color: #330146 !important;
+    }
+  </style>  
+  </head>
+ 
+  <!-- declare our angular application and angular controller -->
+  <body ng-app="LabApp" ng-controller="mainController">
+
+    <div class="app-header">
+      <div class="header-title">
+        <h1><i class="fa fa-hospital-o"></i> Gestión de Usuarios</h1>
+      <p class="subtitle">Sistema Integral de Salud Digital</p>
+      </div>
+      <div class="header-logo">
+        <img src="/views/img/logo.jpg" alt="Logo ETSIT" class="corporative-logo-img">
+      </div>
+    </div>
+
+    <form name="outerForm" class="tab-form-demo"> 
+      <uib-tabset active="activeForm"> 
+
+        <!--PACIENTES-->
+        <uib-tab index="0" heading="Pacientes"> 
+
+          <div ng-show="newPatient==0">
+
+            <!-- Botón añadir paciente -->
+            <a class="btn btn-success" ng-click="addNewPatient();" href="#">
+            <i class="fa fa-plus-circle fa-lg"></i> Paciente</a>
+
+            <!-- Buscador -->
+             <div class="form-group" style="margin-top: 10px;">
+                <div class="input-group">
+                  <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                  <input type="text" class="form-control" placeholder="Buscar paciente por nombre, dirección..." ng-model="searchPatient">
+                </div>
+              </div>
+
+            <!-- Tabla con campos del paciente-->
+
+            <table class="table table-bordered">
+              <tr> 
+                <td>Nombre</td> 
+                <td>Fecha de Nacimiento</td> 
+                <td>Dirección</td> 
+                <td>Teléfono</td> 
+              </tr> 
+              <tr ng-repeat="patient in patients | filter:searchPatient"> 
+                <td> 
+                {{patient.NOMBRE}} 
+                </td> 
+                <td> 
+                {{patient.FECHA_NAC}} 
+                </td> 
+                <td> 
+                {{patient.DIRECCION}} 
+                </td> 
+                <td> 
+                {{patient.TELEFONO}} 
+                </td>
+                <td> 
+                  <span class="fa-stack fa-lg" ng-click="deletePatient(patient.PAC_ID);"> 
+                    <i class="fa fa-circle fa-stack-2x text-danger"></i> 
+                    <i class="fa fa-times fa-stack-1x fa-inverse"></i> 
+                  </span> 
+                </td>
+                <td> 
+                  <span class="fa-stack fa-lg" ng-click="selectedPatient(patient);"> 
+                    <i class="fa fa-circle fa-stack-2x text-success"></i> 
+                    <i class="fa fa-pencil fa-stack-1x fa-inverse"></i> 
+                  </span> 
+                </td>   
+              </tr> 
+            </table>
+          </div>
+
+          <!-- Añadir paciente -->
+          <div ng-show="newPatient==1">
+            <div class="form-container border-pacientes">
+              <!-- Formulario nuevo paciente -->
+              <form name="formPaciente" novalidate > 
+                <table> 
+                  <tr> 
+                    <td> 
+                      <div  class="form-group"> 
+                        Nombre:<input type="text" name="Name"  ng-model="PatientData.patientName" class="form-control" placeholder="Nombre" required /> 
+                      </div> 
+                    </td> 
+                    <td> 
+                      <div  class="form-group"> 
+                        Dirección:<input type="text" name="Address" ng-model="PatientData.patientAddress" class="form-control" required /> 
+                      </div> 
+                    </td> 
+                    <td> 
+                      <div  class="form-group"> 
+                        Teléfono:<input type="text" name="Phone" ng-model="PatientData.patientPhone" class="form-control" ng-pattern="/^\d{9}$/" required />
+                        <span style="color:red; font-size: 0.9em;" ng-show="formPaciente.Phone.$error.pattern || (formPaciente.Phone.$touched && formPaciente.Phone.$error.required)">
+                          <i class="fa fa-exclamation-circle"></i> El teléfono debe tener exactamente 9 dígitos.
+                        </span>
+                      </div> 
+                    </td> 
+                    <td>
+                      <div  class="form-group"> 
+                        Fecha de Nacimiento:<input type="date" name="" ng-model="PatientData.patientBirthdate" class="form-control" required /> 
+                      </div> 
+                    </td> 
+                  </tr>       
+                </table>  
+                <a class="btn btn-success" ng-click="createNewPatient();" ng-show="editing==0" href="#"> 
+                  <i class="fa fa-check-circle fa-lg"></i> Crear</a>
+                <a class="btn btn-success"  ng-click="editPatient();" ng-show="editing==1" href="#"> 
+                  <i class="fa fa-check-circle fa-lg"></i> Editar</a> 
+                <a class="btn btn-danger" ng-click="cancelNewPatient();" href="#"> 
+                  <i class="fa fa-times-circle fa-lg"></i> Cancelar</a>
+              </form>
+            </div>
+          </div>
+        </uib-tab> 
+
+
+        <!--MÉDICOS-->
+        <uib-tab index="1" heading="Médic@s">
+
+          <div ng-show="newDoctor==0">
+
+            <!-- Botón añadir médico -->
+            <a class="btn btn-success" ng-click="addNewDoctor();" href="#">
+            <i class="fa fa-plus-circle fa-lg"></i> Médico</a>
+
+            <!-- Buscador -->
+            <div class="form-group" style="margin-top: 10px;">
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                <input type="text" class="form-control" placeholder="Buscar médico o servicio..." ng-model="searchDoctor">
+              </div>
+            </div>
+
+            <!-- Tabla con campos del médico -->
+            <table class="table table-bordered">
+              <tr> 
+                <td>Nombre</td> 
+                <td>Servicio</td> 
+              </tr> 
+              <tr ng-repeat="doctor in doctors | filter:searchDoctor"> 
+                <td> 
+                {{doctor.MED_NOMBRE}} 
+                </td> 
+                <td> 
+                {{doctor.SERVICIO}} 
+                </td>
+                <td> 
+                  <span class="fa-stack fa-lg" ng-click="deleteDoctor(doctor.MED_ID);"> 
+                    <i class="fa fa-circle fa-stack-2x text-danger"></i> 
+                    <i class="fa fa-times fa-stack-1x fa-inverse"></i> 
+                  </span> 
+                </td>
+                <td> 
+                  <span class="fa-stack fa-lg" ng-click="selectedDoctor(doctor);"> 
+                    <i class="fa fa-circle fa-stack-2x text-success"></i> 
+                    <i class="fa fa-pencil fa-stack-1x fa-inverse"></i> 
+                  </span> 
+                </td> 
+              </tr> 
+            </table>
+          </div>
+          
+          <!-- Añadir médico -->
+          <div ng-show="newDoctor==1">
+            <div class="form-container border-medicos">
+              <!-- Formulario nuevo médico -->
+              <form name="formMedico" novalidate > 
+                <table> 
+                  <tr> 
+                    <td> 
+                      <div  class="form-group"> 
+                        Nombre:<input type="text" name="Name" ng-model="DoctorData.doctorName" class="form-control" placeholder="Nombre" required /> 
+                      </div> 
+                    </td> 
+                    <td> 
+                      <div  class="form-group"> 
+                        Servicio:<input type="text" name="Service" ng-model="DoctorData.doctorService" class="form-control" required /> 
+                      </div> 
+                    </td> 
+                  </tr>       
+                </table>  
+              </form>
+              <a class="btn btn-success" ng-click="createNewDoctor();" ng-show="editing==0" href="#"> 
+                <i class="fa fa-check-circle fa-lg"></i> Crear</a>
+              <a class="btn btn-success"  ng-click="editDoctor();" ng-show="editing==1" href="#"> 
+                <i class="fa fa-check-circle fa-lg"></i> Editar</a> 
+              <a class="btn btn-danger" ng-click="cancelNewDoctor();" href="#"> 
+                <i class="fa fa-times-circle fa-lg"></i> Cancelar</a>
+            </div>
+          </div>
+        </uib-tab>
+
+
+        <!--VISITAS-->
+        <uib-tab index="2" heading="Visitas">
+
+          <div ng-show="newVisit==0">
+
+            <!-- Botón añadir visita -->
+            <a class="btn btn-success" ng-click="addNewVisit();" href="#">
+            <i class="fa fa-plus-circle fa-lg"></i> Visita</a>
+
+            <!-- Buscador -->
+            <div class="form-group" style="margin-top: 10px;">
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                <input type="text" class="form-control" placeholder="Buscar por paciente, médico, fecha o diagnóstico..." ng-model="searchVisit">
+              </div>
+            </div>
+
+            <!-- Tabla con campos de la visita -->
+            <table class="table table-bordered">
+              <tr> 
+                <td>Nombre</td> 
+                <td>Fecha de la visita</td> 
+                <td>Médico</td> 
+                <td>Diagnóstico</td> 
+              </tr> 
+              <tr ng-repeat="visit in visits | filter:searchVisit"> 
+                <td> 
+                {{visit.NOMBRE}} 
+                </td> 
+                <td> 
+                {{visit.FECHA_VIS}} 
+                </td> 
+                <td> 
+                {{visit.MED_NOMBRE}} 
+                </td> 
+                <td> 
+                {{visit.DIAGNOSTICO}} 
+                </td>
+                <td>
+                  <span class="fa-stack fa-lg" ng-click="deleteVisit(visit.VISITA_ID);"> 
+                    <i class="fa fa-circle fa-stack-2x text-danger"></i> 
+                    <i class="fa fa-times fa-stack-1x fa-inverse"></i> 
+                  </span> 
+                </td>
+                <td> 
+                  <span class="fa-stack fa-lg" ng-click="selectedVisit(visit);"> 
+                    <i class="fa fa-circle fa-stack-2x text-success"></i> 
+                    <i class="fa fa-pencil fa-stack-1x fa-inverse"></i> 
+                  </span> 
+                </td> 
+              </tr> 
+            </table>
+          </div>
+            
+          <!-- Añadir visita -->
+          <div ng-show="newVisit==1">
+            <div class="form-container border-visitas">
+              <!-- Formulario nueva visita -->
+              <form name="formVisita" novalidate > 
+                <table> 
+                  <tr>
+                    <td> 
+                      <div  class="form-group"> 
+                        Paciente:<select name="Patient" ng-model="VisitData.patientName" ng-options="opt.name for opt in patientList.Patients" class="form-control" required> </select>
+                      </div> 
+                    </td>
+                    <td> 
+                      <div class="form-group"> 
+                        Servicio:
+                        <select ng-model="VisitData.selectedService" ng-change="VisitData.doctorName = null" 
+                        class="form-control" ng-options="s for s in getUniqueServices()">
+                          <option value="">-- Selecciona Servicio --</option>
+                        </select>
+                      </div> 
+                    </td>
+                    <td> 
+                      <div  class="form-group"> 
+                        Médic@:<select type="text" name="Doctor" ng-model="VisitData.doctorName" class="form-control" 
+                        ng-options="opt.name for opt in doctorList.Doctors | filter:
+                        (VisitData.selectedService ? {service: VisitData.selectedService} : '')" required> </select>
+                      </div> 
+                    </td> 
+                    <td> 
+                      <div  class="form-group"> 
+                        Diagnóstico:<input type="text" name="Diagnosis" ng-model="VisitData.visitDiagnosis" class="form-control" required /> 
+                      </div> 
+                    </td> 
+                    <td> 
+                      <div  class="form-group"> 
+                        Fecha:<input type="date" name="" ng-model="VisitData.visitDate" class="form-control" required /> 
+                      </div> 
+                    </td> 
+                  </tr>       
+                </table>  
+              </form>
+              <a class="btn btn-success" ng-click="createNewVisit();" ng-show="editing==0" href="#"> 
+                <i class="fa fa-check-circle fa-lg"></i> Crear</a>
+              <a class="btn btn-success"  ng-click="editVisit();" ng-show="editing==1" href="#"> 
+                <i class="fa fa-check-circle fa-lg"></i> Editar</a> 
+              <a class="btn btn-danger" ng-click="cancelNewVisit();" href="#"> 
+                <i class="fa fa-times-circle fa-lg"></i> Cancelar</a>
+            </div> 
+          </div>
+        </uib-tab> 
+
+
+      </uib-tabset> 
+    </form>
+  </body>
+</html>

@@ -1,0 +1,61 @@
+/* Fondo */
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #ebd2ee 100%);
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+/* Cuadrado donde se muestran los elementos */
+#boxLogin{ 
+    width: 30%; 
+    margin: auto; 
+    background-color: #d17ab0; 
+    padding:10px; 
+    border-radius: 20px; 
+    margin-top:70px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+    border: 1px solid #e1e8ed;
+} 
+#loginButton{ 
+    text-align:center; 
+    margin-bottom: 20px; 
+    margin-top:25px; 
+} 
+#errorLogin{ 
+    font-weight:bold; 
+    font-size: 15px; 
+    color:#ba0000; 
+    margin-top:10px; 
+    text-align: center; 
+}
+/* Título Login de Usuario */
+#boxLogin h1 {
+    display: block;
+    width: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #2c3e50;
+    font-size: 24px;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #9f116b;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+/* Textos "Usuario" y "Contraseña" */
+#boxLogin strong {
+    color: #34495e;
+    font-size: 14px;
+}
+/* Botón Acceder con efectos */
+#loginButton .btn-success {
+    padding: 10px 30px;
+    border-radius: 25px;
+    transition: all 0.3s ease; 
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+#loginButton .btn-success:hover {
+    transform: scale(1.05); /* Agrandamiento */
+    box-shadow: 0 5px 15px rgba(92, 184, 92, 0.4); /* Efecto sombra verde */
+    background-color: #449d44;
+}

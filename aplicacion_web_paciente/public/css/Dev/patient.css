@@ -1,0 +1,209 @@
+/* Cabecera */
+h1 {
+    font-family: 'Impact', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 3rem; 
+    color: #2c3e50;
+    background: #d17ab0;
+    padding: 20px 20px 20px 80px;
+    margin: 0;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 6px 16px rgba(209, 122, 176, 0.55), 
+                0 2px 4px rgba(0, 0, 0, 0.15);
+    border-bottom: 2px solid #b85a96;
+}
+
+/* Logotipo */
+h1::before {
+    content: '';
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 56S8 38 8 22a14 14 0 0 1 24-9.9A14 14 0 0 1 56 22c0 16-24 34-24 34z' fill='%23d17ab0' stroke='%23ffffff' stroke-width='2'/%3E%3Cpolyline points='16,30 22,24 27,34 32,20 37,30 42,26 48,30' fill='none' stroke='%23ffffff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 0; 
+}
+
+/* Botón Cerrar sesión */
+#logout {
+    float: right;
+    margin-right: 50px;
+    margin-top: -65px;
+    transition: all 0.3s ease;
+    border-radius: 20px;
+    border: 2px solid #ffffff;
+    position: relative;
+    z-index: 1; 
+}
+#logout:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+/* Botones Añadir y Listado / Gráfico */
+#buttonOption {
+    margin: 10px 5px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-weight: 600;
+}
+#buttonOption:hover {
+    transform: scale(1.1); /* Agrandamiento */
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2); /* Sombra pronunciada */
+}
+
+/* Botones Crear y Cancelar del formulario */
+#weightForm .btn-success, 
+#weightForm .btn-danger {
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Movimiento elástico suave */
+    font-weight: bold;
+}
+
+#weightForm .btn-success:hover, 
+#weightForm .btn-danger:hover {
+    transform: scale(1.1); /* Se agranda un 10% */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Sombra para dar profundidad */
+}
+
+/* Icono de Borrar (fa-stack con la equis roja) */
+#weightsList .fa-stack {
+    transition: all 0.3s ease;
+    cursor: pointer; /* Cambia el cursor a mano para indicar que es clicable */
+}
+#weightsList .fa-stack:hover {
+    transform: scale(1.2); /* Agrandamiento */
+}
+#weightsList .fa-stack:hover .text-danger {
+    color: #c9302c !important; /* Rojo un poco más oscuro al hacer hover */
+    filter: drop-shadow(0 0 5px rgba(217, 83, 79, 0.5)); /* Resplandor rojo sutil */
+}
+
+/* Escenario Listado de Pesos */
+.table {
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    overflow: hidden;
+}
+.table thead tr {
+    background-color: #34495e !important;
+    color: white;
+}
+#weightsList {
+    background-color: #e8f5e9; /* Mantiene el verde */
+    padding-top: 80px !important; /* Empuja la tabla hacia abajo sin mover el fondo */
+    margin-top: -55px !important; /* Mantiene la fusión con la pestaña */
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+}
+
+/* Forzamos que todas las celdas de todas las filas tengan fondo blanco sólido */
+#weightsList table.table-striped > tbody > tr > td,
+#weightsList table.table-striped > tbody > tr:nth-of-type(odd) > td {
+    background-color: #ffffff !important;
+    border-top: 1px solid #ddd;
+}
+/* Aplicamos el efecto hover a la fila completa con máxima prioridad */
+#weightsList table.table-striped > tbody > tr:hover > td,
+#weightsList table.table-striped > tbody > tr:nth-of-type(odd):hover > td {
+    background-color: #f2f2f2 !important; 
+    cursor: pointer;
+}
+/* Resaltar la fila seleccionada */
+#weightsList table tbody tr:hover td {
+    color: #000 !important;
+    font-weight: 500;
+}
+
+
+
+/* --- PESTAÑAS --- */
+
+/* Separación arriba para empujar el gráfico hacia abajo (no solape con los botones) */
+#weightsGraph {
+    padding-top: 60px !important; 
+}
+ 
+/* Estilo base de los enlaces de pestaña */
+.nav-tabs > li > a {
+    transition: all 0.3s ease;
+    font-weight: bold;
+    color: #2c3e50;
+    border: none;
+    border-radius: 6px 6px 0 0;
+    background-color: transparent;
+}
+ 
+/* Pestaña de Peso activa o hover — color verde del escenario con borde más oscuro */
+.nav-tabs > li:nth-child(1) > a:hover,
+.nav-tabs > li:nth-child(1).active > a,
+.nav-tabs > li:nth-child(1).active > a:focus,
+.nav-tabs > li:nth-child(1).active > a:hover {
+    background-color: #e8f5e9 !important;
+    border: 2px solid #a5d6a7 !important; /* dos tonos más oscuro que #e8f5e9 */
+    border-bottom-color: #e8f5e9 !important; /* se funde con el escenario */
+    color: #2c3e50 !important;
+}
+ 
+/* Pestaña de Visitas activa o hover — color morado del escenario con borde más oscuro */
+.nav-tabs > li:nth-child(2) > a:hover,
+.nav-tabs > li:nth-child(2).active > a,
+.nav-tabs > li:nth-child(2).active > a:focus,
+.nav-tabs > li:nth-child(2).active > a:hover {
+    background-color: #f3e5f5 !important;
+    border: 2px solid #ce93d8 !important; /* dos tonos más oscuro que #f3e5f5 */
+    border-bottom-color: #f3e5f5 !important; /* se funde con el escenario */
+    color: #2c3e50 !important;
+}
+
+/* --- AJUSTE DE FONDOS --- */
+
+/* Fondo verde para Peso (ajustado para cubrir todo el alto) */
+#weightsGraph, #weightsList, #weightForm {
+    background-color: #e8f5e9;
+    padding: 30px 20px;
+    border-radius: 0 0 10px 10px; /* Redondeado solo abajo */
+    min-height: 85vh; /* Ocupa el 85% de la altura de la ventana */
+    margin-top: -55px; /* Solapa el borde de la pestaña para unión perfecta */
+}
+
+/* Fondo morado para Visitas (ajustado para cubrir todo el alto) */
+#visitsList {
+    background-color: #f3e5f5;
+    padding: 30px 20px;
+    border-radius: 0 0 10px 10px;
+    min-height: 85vh; /* Forzamos que llegue hasta abajo */
+    margin-top: -2px !important;
+}
+
+/* Ajuste adicional para que el cuerpo de la página acompañe el color */
+body {
+    background-color: #f8f9fa; /* Gris muy suave para que resalten los bloques */
+}
+
+/* Estilo de las flechas para pasar páginas del Gráfico */
+#weightsGraph .btn-success {
+    background-color: #d17ab0;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+#weightsGraph .btn-success[disabled] {
+    background-color: #d17ab0;
+    opacity: 0.6;
+}
+
+#weightsGraph .btn-success:hover:not([disabled]) {
+    transform: scale(1.1);
+    background-color: #b85a96;
+}
+
+
+
+
+
+
