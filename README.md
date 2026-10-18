@@ -32,31 +32,31 @@ Portal administrativo para el personal de admisión y coordinación médica:
 
 * **Stack**: AngularJS 1.4.x, Node.js, Express, express-myconnection, MySQL, Bootstrap 3, FontAwesome.
 
-2. Portal del Paciente (aplicacion_web_paciente)
+### 2. Portal del Paciente (aplicacion_web_paciente)
 Portal personal para el paciente enfocado en telemedicina y seguimiento metabólico:
 
-- Autenticación y Sesión: Control de acceso mediante login/password y persistencia de sesión en cliente vía localStorage.
+* **Autenticación y Sesión**: Control de acceso mediante login/password y persistencia de sesión en cliente vía localStorage.
 
-- Rutas Dinámicas (ngRoute): Navegación desacoplada tipo Single Page Application (SPA).
+* **Rutas Dinámicas (ngRoute)**: Navegación desacoplada tipo Single Page Application (SPA).
 
-- Seguimiento Telemétrico: Registro de peso diario (con resolución de duplicados en BD mediante INSERT ... ON DUPLICATE KEY UPDATE).
+* **Seguimiento Telemétrico**: Registro de peso diario (con resolución de duplicados en BD mediante INSERT ... ON DUPLICATE KEY UPDATE).
 
-- Visualización Gráfica: Gráficos interactivos de evolución temporal mediante ng-google-chart (Google Visualization API).
+* **Visualización Gráfica**: Gráficos interactivos de evolución temporal mediante ng-google-chart (Google Visualization API).
 
-- Historial de Consultas: Consulta en tiempo real de citas, diagnósticos y médicos asignados.
+* **Historial de Consultas**: Consulta en tiempo real de citas, diagnósticos y médicos asignados.
 
-- Stack: AngularJS, angular-route, ng-google-chart, Express, MySQL.
+* **Stack**: AngularJS, angular-route, ng-google-chart, Express, MySQL.
 
-3. Portal Profesional & Estación DICOM (aplicacion_web_profesional)
+### 3. Portal Profesional & Estación DICOM (aplicacion_web_profesional)
 Estación clínica para médicos y radiólogos:
 
-- Filtrado por Facultativo: Consulta de agenda y citas asignadas a cada profesional.
+* **Filtrado por Facultativo**: Consulta de agenda y citas asignadas a cada profesional.
 
-- Hibridación Relacional + PACS/DICOM: Consulta cruzada entre la base de datos relacional de gestión (MySQL) y el catálogo de imágenes médicas (Microsoft Access .mdb mediante node-adodb).
+* **Hibridación Relacional + PACS/DICOM**: Consulta cruzada entre la base de datos relacional de gestión (MySQL) y el catálogo de imágenes médicas (Microsoft Access .mdb mediante node-adodb).
 
-- Visor Radiológico Web: Renderizado y parseo de imágenes médicas DICOM nativas en cliente utilizando NgDicomViewer y openjpeg.js.
+* **Visor Radiológico Web**: Renderizado y parseo de imágenes médicas DICOM nativas en cliente utilizando NgDicomViewer y openjpeg.js.
 
-- Herramientas de Diagnóstico por Imagen:
+* **Herramientas de Diagnóstico por Imagen**:
 
     Ventaneo y ajuste de contraste (Window/Level).
 
@@ -66,48 +66,48 @@ Estación clínica para médicos y radiólogos:
 
     Inspector de metadatos clínicos y cabeceras de tags DICOM.
 
-- Stack: AngularJS, node-adodb, NgDicomViewer, openjpeg, Express, MySQL, Access ODBC.
+* **Stack**: AngularJS, node-adodb, NgDicomViewer, openjpeg, Express, MySQL, Access ODBC.
 
 
-⚙️ REQUISITOS PREVIOS
+##⚙️ REQUISITOS PREVIOS
 
-- Node.js (versión 14.x a 18.x recomendada para compatibilidad de dependencias legadas).
+* Node.js (versión 14.x a 18.x recomendada para compatibilidad de dependencias legadas).
 
-- XAMPP (con servicios de Apache y MySQL activos).
+* XAMPP (con servicios de Apache y MySQL activos).
 
-- Entorno Windows con Microsoft Access Database Engine (necesario para el driver OLE DB de node-adodb en el módulo profesional).
+* Entorno Windows con Microsoft Access Database Engine (necesario para el driver OLE DB de node-adodb en el módulo profesional).
 
 
-🚀 DESPLIEGUE E INSTALACIÓN
+## 🚀 DESPLIEGUE E INSTALACIÓN
 
-1. Configuración de la Base de Datos
-Inicia XAMPP Control Panel y arranca los módulos Apache y MySQL.
+### 1. Configuración de la Base de Datos
+* Inicia XAMPP Control Panel y arranca los módulos Apache y MySQL.
 
-Entra en http://localhost/phpmyadmin.
+* Entra en http://localhost/phpmyadmin.
 
-Crea las tres bases de datos requeridas por cada módulo:
+* Crea las tres bases de datos requeridas por cada módulo:
 
-- testdb (utilizada por aplicacion_web_gestion).
+  testdb (utilizada por aplicacion_web_gestion).
 
-- testdb2 (utilizada por aplicacion_web_profesional).
+  testdb2 (utilizada por aplicacion_web_profesional).
 
-- testdb3 (utilizada por aplicacion_web_paciente).
+  testdb3 (utilizada por aplicacion_web_paciente).
 
-Selecciona cada una de ellas e importa el archivo database/database_schema.sql.
+* Selecciona cada una de ellas e importa el archivo database/database_schema.sql.
 
-2. Arranque de los Módulos
+### 2. Arranque de los Módulos
 Para ejecutar cualquiera de las aplicaciones:
 
-# Navega al directorio del módulo que deseas arrancar
+* Navega al directorio del módulo que deseas arrancar
 cd aplicacion_web_gestion       # o aplicacion_web_paciente / aplicacion_web_profesional
 
-# Instala las dependencias (solo la primera vez)
+* Instala las dependencias (solo la primera vez)
 npm install
 
-# Inicia el servidor Node.js
+* Inicia el servidor Node.js
 node server.js
 
-Abre tu navegador en http://localhost:8080.
+* Abre tu navegador en http://localhost:8080.
 
 
 🔐 CREDENCIALES DE PRUEBA (PORTAL PACIENTE)
