@@ -98,16 +98,16 @@ Estación clínica para médicos y radiólogos:
 ### 2. Arranque de los Módulos
 Para ejecutar cualquiera de las aplicaciones:
 
-* Navega al directorio del módulo que deseas arrancar
-cd aplicacion_web_gestion       # o aplicacion_web_paciente / aplicacion_web_profesional
+# Navega al directorio del módulo que deseas arrancar
+cd aplicacion_web_gestion / aplicacion_web_paciente / aplicacion_web_profesional
 
-* Instala las dependencias (solo la primera vez)
+# Instala las dependencias (solo la primera vez)
 npm install
 
-* Inicia el servidor Node.js
+# Inicia el servidor Node.js
 node server.js
 
-* Abre tu navegador en http://localhost:8080.
+Abre tu navegador en http://localhost:8080.
 
 
 ## 🔐 CREDENCIALES DE PRUEBA (PORTAL PACIENTE)
