@@ -1,13 +1,14 @@
-# Digital Health Web Suite (HIS & Patient/Physician Portals)
+# 🏥 Digital Health Web Suite (HIS & Patient/Physician Portals)
 
-Plataforma modular e-Health para la gestión hospitalaria, seguimiento ambulatorio de pacientes y estación de trabajo radiológica con visor DICOM. Desarrollada en el marco del **Laboratorio de Aplicaciones en Salud Digital** (Grado en Ingeniería Biomédica ETSIT - UPM).
+Plataforma modular e-Health para la gestión hospitalaria, seguimiento ambulatorio de pacientes y estación de trabajo radiológica con visor DICOM. Desarrollada en el marco del **Laboratorio de Aplicaciones en Salud Digital** (Grado en Ingeniería Biomédica / Telecomunicaciones, GBT - UPM).
 
 ---
 
-## Arquitectura del Ecosistema
+## 🌟 Arquitectura del Ecosistema
 
 El sistema integra tres módulos independientes que interoperan compartiendo modelos relacionales clínicos, almacenamiento de bioseñales e imágenes médicas:
 
+```text
 Digital-Health-Suite/
 ├── aplicacion_web_gestion/        # Módulo de Admisión y Gestión Hospitalaria
 ├── aplicacion_web_paciente/       # Portal del Paciente (Monitoreo ambulatorio)
@@ -15,7 +16,6 @@ Digital-Health-Suite/
 ├── database/                      # Esquemas SQL para MySQL/phpMyAdmin
 ├── docs/                          # Memorias técnicas de diseño y UX
 └── .gitignore
-└── README.md
 
 
 💻 MÓDULOS Y TECNOLOGÍAS
