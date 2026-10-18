@@ -69,7 +69,7 @@ Estación clínica para médicos y radiólogos:
 * **Stack**: AngularJS, node-adodb, NgDicomViewer, openjpeg, Express, MySQL, Access ODBC.
 
 
-##⚙️ REQUISITOS PREVIOS
+## ⚙️ REQUISITOS PREVIOS
 
 * Node.js (versión 14.x a 18.x recomendada para compatibilidad de dependencias legadas).
 
@@ -110,7 +110,7 @@ node server.js
 * Abre tu navegador en http://localhost:8080.
 
 
-🔐 CREDENCIALES DE PRUEBA (PORTAL PACIENTE)
+## 🔐 CREDENCIALES DE PRUEBA (PORTAL PACIENTE)
 
 Para verificar el control de acceso en aplicacion_web_paciente:
 
