@@ -19,18 +19,18 @@ Digital-Health-Suite/
 ```
 
 
-💻 MÓDULOS Y TECNOLOGÍAS
+## 💻 MÓDULOS Y TECNOLOGÍAS
 
-1. Módulo de Gestión Hospitalaria (aplicacion_web_gestion)
+### 1. Módulo de Gestión Hospitalaria (aplicacion_web_gestion)
 Portal administrativo para el personal de admisión y coordinación médica:
 
-- CRUD Completo: Altas, bajas, modificaciones y consultas de Pacientes, Médicos y Visitas.
+* **CRUD Completo**: Altas, bajas, modificaciones y consultas de Pacientes, Médicos y Visitas.
 
-- Integridad referencial clínica: Validación de reglas de negocio para impedir el borrado de facultativos o pacientes con visitas       activas en el histórico.
+* **Integridad referencial clínica**: Validación de reglas de negocio para impedir el borrado de facultativos o pacientes con visitas activas en el histórico.
 
-- Formularios Dinámicos con UI Bootstrap: Selectores enlazados (ng-options) que evitan inconsistencias vinculando identificadores reales (PAC_ID, MED_ID).
+* **Formularios Dinámicos con UI Bootstrap**: Selectores enlazados (ng-options) que evitan inconsistencias vinculando identificadores reales (PAC_ID, MED_ID).
 
-Stack: AngularJS 1.4.x, Node.js, Express, express-myconnection, MySQL, Bootstrap 3, FontAwesome.
+* **Stack**: AngularJS 1.4.x, Node.js, Express, express-myconnection, MySQL, Bootstrap 3, FontAwesome.
 
 2. Portal del Paciente (aplicacion_web_paciente)
 Portal personal para el paciente enfocado en telemedicina y seguimiento metabólico:
