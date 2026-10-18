@@ -16,7 +16,7 @@ Digital-Health-Suite/
 ├── database/                      # Esquemas SQL para MySQL/phpMyAdmin
 ├── docs/                          # Memorias técnicas de diseño y UX
 └── .gitignore
-text```
+```
 
 
 💻 MÓDULOS Y TECNOLOGÍAS
